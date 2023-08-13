@@ -5,9 +5,18 @@ function renderBooks(filter) {
   
   if (filter === 'LOW_TO_HIGH') {
     /* filters by price low to high */
-    console.log(filter)
     const filteredBooks = books.sort((a,b) => a.originalPrice - b.originalPrice)
-  }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+  } 
+  
+  if (filter === 'HIGH_TO_LOW') {
+    const filteredBooks = books.sort((a,b) => b.originalPrice - a.originalPrice)
+  }
+
+  if (filter === 'RATING') {
+    const filteredBooks = books.sort((a,b) => b.rating - a.rating)
+  }
+
+
 
   const booksHtml = books.map((book) => {
     /* returns an array so use .join() to get rid of commas */
@@ -19,11 +28,7 @@ function renderBooks(filter) {
                 ${book.title}
               </div>
               <div class="book__ratings">
-                <i class="fas fa-star" aria-hidden="true"></i>
-                <i class="fas fa-star" aria-hidden="true"></i>
-                <i class="fas fa-star" aria-hidden="true"></i>
-                <i class="fas fa-star" aria-hidden="true"></i>
-                <i class="fas fa-star-half-alt" aria-hidden="true"></i>
+                ${ratingsHTML(book.rating)}
               </div>
               <div class="book__price">
                 <span>$${book.originalPrice.toFixed(2)}</span>
@@ -41,6 +46,19 @@ function filterBooks(event) {
  
     renderBooks(event.target.value);
  
+}
+
+function ratingsHTML(rating) {
+  let ratingHtml = "";
+  for (let i = 0; i < Math.floor(rating); i++) {
+    ratingHtml += '<i class="fas fa-star"></i>\n';
+  }
+
+  if (!Number.isInteger(rating)) {
+    ratingHtml += '<i class="fas fa-star-half-alt"></i>\n';
+  }
+
+  return ratingHtml;
 }
 
 setTimeout(() => {

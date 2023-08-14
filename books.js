@@ -18,10 +18,12 @@ async function renderBooks(filter) {
   } 
   
   if (filter === 'HIGH_TO_LOW') {
+    /* filters by price high to low */
     const filteredBooks = books.sort((a,b) => (b.salePrice || b.originalPrice) - (a.salePrice || a.originalPrice))
   }
 
   if (filter === 'RATING') {
+    /* filters by rating high to low */
     const filteredBooks = books.sort((a,b) => b.rating - a.rating)
   }
 
